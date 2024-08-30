@@ -137,10 +137,11 @@ class WC_Monthly_Sales_Report {
     }
 
     public function activate_cron() {
-        if (!wp_next_scheduled('wc_monthly_sales_report_cron_hook')) {
-            wp_schedule_event(time(), 'daily', 'wc_monthly_sales_report_cron_hook');
-        }
+    if (!wp_next_scheduled('wc_monthly_sales_report_cron_hook')) {
+        $timestamp = strtotime('06:00:00'); // Schedule at 6 AM
+        wp_schedule_event($timestamp, 'daily', 'wc_monthly_sales_report_cron_hook');
     }
+}
 
     public function deactivate_cron() {
         $timestamp = wp_next_scheduled('wc_monthly_sales_report_cron_hook');
